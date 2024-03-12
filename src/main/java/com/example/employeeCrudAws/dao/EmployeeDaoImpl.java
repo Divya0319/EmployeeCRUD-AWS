@@ -7,6 +7,7 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.example.employeeCrudAws.entity.Employee;
+import com.example.employeeCrudAws.entity.EmployeeDto;
 
 import jakarta.persistence.EntityManager;
 
@@ -38,12 +39,24 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
 	@Override
 	public Employee findEmpById(int theId) {
-		return null;
+		Session findEmpByIdSession = entityManager.unwrap(Session.class);
+		
+		Employee emp = findEmpByIdSession.get(Employee.class, theId);
+
+		return emp;
 	}
 
 	@Override
 	public boolean deleteEmpById(int theId) {
-		return false;
+		Session deleteEmpByIdSession = entityManager.unwrap(Session.class);
+		Employee emp = deleteEmpByIdSession.get(Employee.class, theId);
+		
+		if(emp == null) {
+			return false;
+		}
+		
+		deleteEmpByIdSession.remove(emp);
+		return true;
 	}
 
 }
