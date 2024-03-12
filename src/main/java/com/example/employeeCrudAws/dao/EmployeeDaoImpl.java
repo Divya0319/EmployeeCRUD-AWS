@@ -2,6 +2,9 @@ package com.example.employeeCrudAws.dao;
 
 import java.util.List;
 
+import org.hibernate.Session;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.example.employeeCrudAws.entity.Employee;
 
 import jakarta.persistence.EntityManager;
@@ -9,10 +12,18 @@ import jakarta.persistence.EntityManager;
 public class EmployeeDaoImpl implements EmployeeDao {
 	
 	private EntityManager entityManager;
+	
+	
+	@Autowired
+	public EmployeeDaoImpl(EntityManager entityManager) {
+		this.entityManager = entityManager;
+	}
 
 	@Override
 	public Integer save(Employee emp) {
-		return null;
+		
+		Session addEmployeeSession = entityManager.unwrap(Session.class);
+		return addEmployeeSession.merge(emp).getId();
 	}
 
 	@Override
