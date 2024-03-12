@@ -3,6 +3,7 @@ package com.example.employeeCrudAws.dao;
 import java.util.List;
 
 import org.hibernate.Session;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.example.employeeCrudAws.entity.Employee;
@@ -28,7 +29,11 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
 	@Override
 	public List<Employee> findAll() {
-		return null;
+		Session getAllEmployeeSession = entityManager.unwrap(Session.class);
+		Query<Employee> theQuery = getAllEmployeeSession.createQuery("from Employee", Employee.class);
+		
+		List<Employee> employees = theQuery.getResultList();
+		return employees;
 	}
 
 }
