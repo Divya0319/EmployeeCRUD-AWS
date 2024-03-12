@@ -9,7 +9,7 @@ public interface EmployeeService {
 
 	Integer save(Employee emp);
 	
-	List<Employee> findAll();
+	List<Employee> fetchAllEmployees();
 	
 	Employee findEmpById(int theId);
 	
