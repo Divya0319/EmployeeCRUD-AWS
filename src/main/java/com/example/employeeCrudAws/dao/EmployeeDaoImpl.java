@@ -36,4 +36,14 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		return employees;
 	}
 
+	@Override
+	public Employee findEmpById(int theId) {
+		return null;
+	}
+
+	@Override
+	public boolean deleteEmpById(int theId) {
+		return false;
+	}
+
 }
