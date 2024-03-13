@@ -46,12 +46,6 @@
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
 		</dependency>
-		
-		<dependency>
-        	<groupId>org.mapstruct</groupId>
-        	<artifactId>mapstruct</artifactId>
-        	<version>1.5.0.Final</version> 
-    	</dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -67,6 +61,7 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
+		<finalName>employeecrud-aws-eks</finalName>
 	</build>
 
 </project>
