@@ -20,8 +20,8 @@ spec:
         app: employeecrud-aws-eks
     spec:
       containers:
-        name: employeecrud-aws-eks
-      - image: 851725279940.dkr.ecr.us-east-2.amazonaws.com/employeecrud-aws-eks:latest
+      - name: employeecrud-aws-eks
+        image: 851725279940.dkr.ecr.us-east-2.amazonaws.com/employeecrud-aws-eks:latest
         imagePullPolicy: IfNotPresent
         ports:
         -  containerPort: 8000
