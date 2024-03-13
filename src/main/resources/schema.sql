@@ -1,6 +1,6 @@
---CREATE DATABASE IF NOT EXISTS employee_dir;
+CREATE DATABASE IF NOT EXISTS employee_dir;
 
---USE employee_dir;
+USE employee_dir;
 
 DROP TABLE IF EXISTS employee;
 
