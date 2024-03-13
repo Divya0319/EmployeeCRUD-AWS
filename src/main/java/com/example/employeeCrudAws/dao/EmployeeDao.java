@@ -3,7 +3,6 @@ package com.example.employeeCrudAws.dao;
 import java.util.List;
 
 import com.example.employeeCrudAws.entity.Employee;
-import com.example.employeeCrudAws.entity.EmployeeDto;
 
 public interface EmployeeDao {
 	
@@ -14,5 +13,7 @@ public interface EmployeeDao {
 	Employee findEmpById(int theId);
 	
 	boolean deleteEmpById(int theId);
+	
+	boolean updateEmp(Employee emp);
 	
 }

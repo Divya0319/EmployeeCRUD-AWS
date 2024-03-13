@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.employeeCrudAws.entity.Employee;
-import com.example.employeeCrudAws.entity.EmployeeDto;
 import com.example.employeeCrudAws.service.EmployeeService;
 
 import jakarta.servlet.http.HttpServletResponse;
@@ -71,14 +70,14 @@ public class EmployeeRestController {
 		return emp;
 	}
 	
-	@PutMapping("/employees/{empId}")
-	public Integer updateCoder(@RequestBody EmployeeDto empDto, HttpServletResponse response) {
+	@PutMapping("/employees")
+	public boolean updateCoder(@RequestBody Employee emp, HttpServletResponse response) {
 		
-		int coderFound = empService.updateEmp(empDto);
+		boolean coderFound = empService.updateEmp(emp);
 		
-		if(coderFound == -1) {
+		if(!coderFound) {
 			response.setStatus(HttpStatus.NOT_FOUND.value());
-			return -1;
+			return true;
 		}
 		
 		response.setStatus(HttpStatus.OK.value());

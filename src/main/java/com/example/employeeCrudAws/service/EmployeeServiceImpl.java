@@ -3,18 +3,19 @@ package com.example.employeeCrudAws.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.employeeCrudAws.dao.EmployeeDao;
 import com.example.employeeCrudAws.entity.Employee;
-import com.example.employeeCrudAws.entity.EmployeeDto;
-import com.example.employeeCrudAws.entity.EmployeeMapper;
 
+
+@Service
+@Transactional
 public class EmployeeServiceImpl implements EmployeeService {
 	
-	private EmployeeDao empDao;
-	
 	@Autowired
-	private EmployeeMapper empMapper;
+	private EmployeeDao empDao;
 
 	@Override
 	public Integer save(Employee emp) {
@@ -37,14 +38,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 	}
 
 	@Override
-	public Integer updateEmp(EmployeeDto dto) {
-		Employee myEmp = empDao.findEmpById(dto.getId());
-		if(myEmp == null) {
-			return -1;
-		}
-		
-		empMapper.updateEmpFromDto(dto, myEmp);
-		return empDao.save(myEmp);
+	public boolean updateEmp(Employee emp) {
+		return empDao.updateEmp(emp);
 	}
 
 }

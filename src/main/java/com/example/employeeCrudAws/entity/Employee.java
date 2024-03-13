@@ -26,6 +26,10 @@ public class Employee {
 	
 	private String department;
 	
+	public Employee() {
+		
+	}
+	
 
 	public Employee(String firstName, String lastName, Integer age, Integer salary, String department) {
 		this.firstName = firstName;
