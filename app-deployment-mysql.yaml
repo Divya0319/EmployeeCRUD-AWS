@@ -1,0 +1,71 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: empcrud-aws
+  name: empcrud-aws
+spec:
+  selector:
+    matchLabels:
+      app: empcrud-aws
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate    
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: empcrud-aws
+    spec:
+      containers:
+        - name: empcrud-aws
+          image: 851725279940.dkr.ecr.us-east-2.amazonaws.com/empcrud-aws:1.0.0-MYSQL
+          imagePullPolicy: IfNotPresent
+          ports:
+          -  containerPort: 8000
+          resources:
+            requests: 
+              cpu: "250m"
+          env:   # Setting Enviornmental Variables
+            - name: DB_HOST   # Setting Database host address from configMap
+              valueFrom :
+                configMapKeyRef :
+                  name : db-config
+                  key :  host
+
+            - name: DB_NAME  # Setting Database name from configMap
+              valueFrom :
+                configMapKeyRef :
+                  name : db-config
+                  key :  dbName
+
+            - name: DB_USERNAME  # Setting Database username from Secret
+              valueFrom :
+                secretKeyRef :
+                  name : mysql-secrets
+                  key :  username
+
+            - name: DB_PASSWORD # Setting Database password from Secret
+              valueFrom :
+                secretKeyRef :
+                  name : mysql-secrets
+                  key :  password
+      restartPolicy: "Always"
+---
+# Define a 'Service' To Expose the application
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: empcrud-aws
+  name: empcrud-aws
+spec:
+  ports:
+    - protocol: TCP
+      port: 80    # Port inside the cluster
+      targetPort: 8000   # Port exposed to the outside
+  selector:
+    app: empcrud-aws
+  type: LoadBalancer

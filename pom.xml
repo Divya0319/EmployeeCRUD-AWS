@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.example</groupId>
 	<artifactId>EmployeeCRUD-AWS</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.0-MYSQL</version>
 	<name>EmployeeCRUD-AWS</name>
 	<description>Creates employee database, and provides access to it via endpoints</description>
 	<properties>
