@@ -1,4 +1,4 @@
-# Define a 'PersistentVolume' and 'PersistentVolumeClaim'
+# Define a 'Persistent Volume Claim'(PVC) and 'PersistentVolume' for MySQL Storage, dynamically provisioned by cluster
 apiVersion: v1
 kind: PersistentVolume
 metadata:
@@ -8,7 +8,7 @@ metadata:
 spec:
   storageClassName: manual
   capacity:
-    storage: 20Gi
+    storage: 1Gi
   accessModes:
     - ReadWriteOnce
   hostPath:
@@ -26,7 +26,7 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 20Gi
+      storage: 1Gi
       
 ---
 
@@ -48,6 +48,7 @@ spec:
     metadata:
       labels: # Must match 'Service' and 'Deployment' selectors
         app: mysql
+        tier: database
     spec:
       containers:
         - name: mysql
@@ -88,5 +89,8 @@ spec:
       targetPort: 3306
   selector:
     app: mysql
+    app: mysql
+    tier: database
+  clusterIP: None # DNS is used, so clusterIP is not needed
       
 ---
