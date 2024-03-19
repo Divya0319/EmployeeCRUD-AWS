@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
         - name: empcrud-aws
-          image: 851725279940.dkr.ecr.us-east-2.amazonaws.com/empcrud-aws:1.0.0-MYSQL
+          image: 865868102637.dkr.ecr.us-east-2.amazonaws.com/empcrud-aws:1.0
           imagePullPolicy: IfNotPresent
           ports:
           -  containerPort: 8000
@@ -39,7 +39,7 @@ spec:
               valueFrom :
                 configMapKeyRef :
                   name : db-config
-                  key :  dbName
+                  key :  dbNameForEmp
 
             - name: DB_USERNAME  # Setting Database username from Secret
               valueFrom :
