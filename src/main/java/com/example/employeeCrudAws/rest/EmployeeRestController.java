@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,13 +25,20 @@ public class EmployeeRestController {
 	private EmployeeService empService;
 	
 	@Autowired
+	Environment environment;
+	
+	@Autowired
 	public EmployeeRestController(EmployeeService empService) {
 		this.empService = empService;
 	}
 	
+	
 	@GetMapping("/welcome")
 	public String getDefaultResponse() {
-		return "Hi, you have successfully configured H2 database and Spring Booot data JPA in this project";
+		// CHANGE-KUBERNETES
+		String host = environment.getProperty("HOSTNAME");
+		host = host.substring(host.length() - 5, host.length());
+		return "Hi, your pod id is " + host;
 	}
 	
 	@GetMapping("/employees")
