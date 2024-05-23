@@ -84,7 +84,6 @@ spec:
       targetPort: 3306
   selector:
     app: mysql
-    app: mysql
     tier: database
   clusterIP: None # DNS is used, so clusterIP is not needed
       

@@ -21,13 +21,13 @@ spec:
     spec:
       containers:
         - name: empcrud-aws
-          image: 865868102637.dkr.ecr.us-east-2.amazonaws.com/empcrud-aws:1.0
+          image: 865868102637.dkr.ecr.us-east-2.amazonaws.com/empcrud-aws:1.1
           imagePullPolicy: IfNotPresent
           ports:
           -  containerPort: 8000
-          resources:
-            requests: 
-              cpu: "250m"
+          #resources:
+          #  requests: 
+          #    cpu: "250m"
           env:   # Setting Enviornmental Variables
             - name: DB_HOST   # Setting Database host address from configMap
               valueFrom :
